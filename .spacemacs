@@ -266,6 +266,20 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
+
+  ;; copy file path to clipboard
+  (defun my-put-file-name-on-clipboard ()
+    "Put the current file name on the clipboard"
+    (interactive)
+    (let ((filename (if (equal major-mode 'dired-mode)
+                        default-directory
+                      (buffer-file-name))))
+      (when filename
+        (with-temp-buffer
+          (insert filename)
+          (clipboard-kill-region (point-min) (point-max)))
+        (message filename))))
+
   (setq org-enforce-todo-dependencies t)
   (defun air-pop-to-org-agenda (split)
     "Visit the org agenda, in the current window or a SPLIT."
@@ -290,21 +304,20 @@ you should place you code here."
         (replace-match tags)
         (org-set-tags t))))
 
+  ;; Define hotkey
   (define-key global-map (kbd "C-c t a") 'air-pop-to-org-agenda)
   (define-key global-map (kbd "C-c t n") 'org-capture)
   (define-key global-map (kbd "C-c t d") 'org-archive-subtree-default)
   (define-key global-map (kbd "C-c t s") 'org-schedule)
   (define-key global-map (kbd "C-c f t") 'org-tags-view)
   (define-key global-map (kbd "C-c f k") 'org-search-view)
+  (define-key global-map (kbd "C-c f p") 'my-put-file-name-on-clipboard)
   (setq org-log-redeadline (quote time))
   (setq org-log-reschedule (quote time))
   (setq org-capture-templates
         '(("n" "Scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U SCHEDULED: %^t\n** %?")
-          ("o" "Un scheduled work item" entry
-           (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo %^{Brief Description} [/] %^g\nAdded: %U \n** %?")))
+           "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U SCHEDULED: %^t\n** %?")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
