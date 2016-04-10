@@ -266,11 +266,25 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
-  (setq org-enforce-todo-dependencies t)
+
+  ;; copy file path to clipboard
+  (defun my-put-file-name-on-clipboard ()
+    "Put the current file name on the clipboard"
+    (interactive)
+    (let ((filename (if (equal major-mode 'dired-mode)
+                        default-directory
+                      (buffer-file-name))))
+      (when filename
+        (with-temp-buffer
+          (insert filename)
+          (clipboard-kill-region (point-min) (point-max)))
+        (message filename))))
+
   (defun air-pop-to-org-agenda (split)
     "Visit the org agenda, in the current window or a SPLIT."
     (interactive "P")
     (org-agenda-list)
+    (org-agenda-filter-by-tag-refine "")
     (when (not split)
       (delete-other-windows)))
 
@@ -290,21 +304,40 @@ you should place you code here."
         (replace-match tags)
         (org-set-tags t))))
 
+  ;; Define hotkey
   (define-key global-map (kbd "C-c t a") 'air-pop-to-org-agenda)
   (define-key global-map (kbd "C-c t n") 'org-capture)
   (define-key global-map (kbd "C-c t d") 'org-archive-subtree-default)
   (define-key global-map (kbd "C-c t s") 'org-schedule)
   (define-key global-map (kbd "C-c f t") 'org-tags-view)
   (define-key global-map (kbd "C-c f k") 'org-search-view)
+  (define-key global-map (kbd "C-c f p") 'my-put-file-name-on-clipboard)
+
+  ;; org mode configs 
+  (setq org-log-into-drawer t)
+  (setq org-deadline-warning-days 2)
   (setq org-log-redeadline (quote time))
   (setq org-log-reschedule (quote time))
+  (setq org-enforce-todo-dependencies t)
   (setq org-capture-templates
         '(("n" "Scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
            "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U SCHEDULED: %^t\n** %?")
-          ("o" "Un scheduled work item" entry
+          ("d" "Scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo %^{Brief Description} [/] %^g\nAdded: %U \n** %?")))
+           "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U DEADLINE: %^t\n** %?")))
+
+  ;; customize agenda commands
+  (setq org-agenda-custom-commands
+        '(
+          ("D" "Daily Action List"
+           (
+            (agenda "" ((org-agenda-ndays 1)
+                        (org-agenda-sorting-strategy
+                         (quote ((agenda time-up priority-down tag-up) )))
+                        (org-deadline-warning-days 0)
+                        ))))
+            ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
