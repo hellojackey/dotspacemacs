@@ -320,12 +320,19 @@ you should place you code here."
   (setq org-log-reschedule (quote time))
   (setq org-enforce-todo-dependencies t)
   (setq org-capture-templates
-        '(("n" "Scheduled work item" entry
+        '(("n" "No tag scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U SCHEDULED: %^t\n** %?")
-          ("d" "Scheduled work item" entry
+           "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U SCHEDULED: %^t%?\n** ")
+          ("d" "No tag deadline work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U DEADLINE: %^t\n** %?")))
+           "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U DEADLINE: %^t%?\n** ")
+          ("l" "Life scheduled work item" entry
+           (file "d:/GoogleDrive/OrgMode/todo.org")
+           "* Todo [#B] %^{Brief Description} [/] :life:\nAdded: %U SCHEDULED: %u%?\n** ")
+          ("w" "Work scheduled work item" entry
+           (file "d:/GoogleDrive/OrgMode/todo.org")
+           "* Todo [#B] %^{Brief Description} [/] :work:\nAdded: %U SCHEDULED: %u%?\n** ")
+          ))
 
   ;; customize agenda commands
   (setq org-agenda-custom-commands
