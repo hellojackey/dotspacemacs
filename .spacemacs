@@ -332,6 +332,9 @@ you should place you code here."
           ("w" "Work scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
            "* Todo [#B] %^{Brief Description} [/] :work:\nAdded: %U SCHEDULED: %t%?\n** ")
+          ("e" "Work email scheduled work item" entry
+           (file "d:/GoogleDrive/OrgMode/todo.org")
+           "* Todo [#B] Read Email %^{Email subject} [/] :work:\nAdded: %U SCHEDULED: %t%?\n** ")
           ))
 
   ;; customize agenda commands
