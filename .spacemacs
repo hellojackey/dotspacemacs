@@ -328,10 +328,10 @@ you should place you code here."
            "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U DEADLINE: %^t%?\n** ")
           ("l" "Life scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] %^{Brief Description} [/] :life:\nAdded: %U SCHEDULED: %u%?\n** ")
+           "* Todo [#B] %^{Brief Description} [/] :life:\nAdded: %U SCHEDULED: %t%?\n** ")
           ("w" "Work scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] %^{Brief Description} [/] :work:\nAdded: %U SCHEDULED: %u%?\n** ")
+           "* Todo [#B] %^{Brief Description} [/] :work:\nAdded: %U SCHEDULED: %t%?\n** ")
           ))
 
   ;; customize agenda commands
