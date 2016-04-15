@@ -315,10 +315,13 @@ you should place you code here."
 
   ;; org mode configs 
   (setq org-log-into-drawer t)
+  (setq org-agenda-start-with-follow-mode t)
   (setq org-deadline-warning-days 2)
   (setq org-log-redeadline (quote time))
   (setq org-log-reschedule (quote time))
   (setq org-enforce-todo-dependencies t)
+  (setq-default truncate-lines t)
+  (setq truncate-partial-width-windows nil) 
   (setq org-capture-templates
         '(("n" "No tag scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
