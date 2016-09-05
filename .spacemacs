@@ -325,19 +325,25 @@ you should place you code here."
   (setq org-capture-templates
         '(("n" "No tag scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U SCHEDULED: %^t%?\n** ")
+           "* Todo [#B] %^{Brief Description} [/] %^g\nSCHEDULED: %^t%?\nAdded: %U\n** ")
           ("d" "No tag deadline work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
            "* Todo [#B] %^{Brief Description} [/] %^g\nAdded: %U DEADLINE: %^t%?\n** ")
           ("l" "Life scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] %^{Brief Description} [/] :life:\nAdded: %U SCHEDULED: %t%?\n** ")
+           "* Todo [#B] %^{Brief Description} [/] :life:\nSCHEDULED: %t%?\nAdded: %U \n** ")
+          ("r" "Learning related scheduled work item" entry
+           (file "d:/GoogleDrive/OrgMode/todo.org")
+           "* Todo [#B] %^{Brief Description} [/] :life:read:\nSCHEDULED: %t%?\nAdded: %U \n** ")
           ("w" "Work scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] %^{Brief Description} [/] :work:\nAdded: %U SCHEDULED: %t%?\n** ")
+           "* Todo [#B] %^{Brief Description} [/] :work:\nSCHEDULED: %t%?\nAdded: %U \n** ")
           ("e" "Work email scheduled work item" entry
            (file "d:/GoogleDrive/OrgMode/todo.org")
-           "* Todo [#B] Read Email %^{Email subject} [/] :work:\nAdded: %U SCHEDULED: %t%?\n** ")
+           "* Todo [#B] Read Email %^{Email subject} [/] :work:\nSCHEDULED: %t%?\nAdded: %U \n** ")
+          ("i" "interview scheduled work item" entry
+           (file "d:/GoogleDrive/OrgMode/todo.org")
+           "* Todo [#B] Read Email %^{Email subject} [/] :life:interview:\nSCHEDULED: %t%?\nAdded: %U \n** ")
           ))
 
   ;; customize agenda commands
